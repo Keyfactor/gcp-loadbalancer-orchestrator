@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 
 using Microsoft.Extensions.Logging;
 
+using Keyfactor.Orchestrators.Common.Enums;
 using Keyfactor.Orchestrators.Extensions;
 using Keyfactor.Logging;
 
@@ -40,10 +41,13 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
         private string project;
         private string region = string.Empty;
         private ComputeService service;
+        ILogger logger;
 
         public GCPStore(string storePath, Dictionary<string, string> storeProperties)
         {
-            SetProjectAndRegion(config.CertificateStoreDetails.StorePath);
+            logger = LogHandler.GetClassLogger<Management>();
+
+            SetProjectAndRegion(storePath);
             this.jsonKey = storeProperties["jsonKey"];
 
             logger.LogDebug("project: " + this.project);
@@ -192,7 +196,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                         {
                             Alias = sslCertificate.Name,
                             Certificates = new string[] { sslCertificate.Certificate },
-                            ItemStatus = AgentInventoryItemStatus.Unknown,
+                            ItemStatus = OrchestratorInventoryItemStatus.Unknown,
                             PrivateKeyEntry = false,
                             UseChainLevel = false
                         });
@@ -205,7 +209,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                         {
                             Alias = sslCertificate.Name,
                             Certificates = new string[] { sslCertificate.SelfManaged.Certificate },
-                            ItemStatus = AgentInventoryItemStatus.Unknown,
+                            ItemStatus = OrchestratorInventoryItemStatus.Unknown,
                             PrivateKeyEntry = false,
                             UseChainLevel = false
                         });
@@ -243,7 +247,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
             if (response.HttpErrorStatusCode != null)
             {
                 logger.LogError("Error performing certificate add: " + response.HttpErrorMessage);
-                logger.LogDebug(response.HttpErrorStatusCode);
+                logger.LogDebug(response.HttpErrorStatusCode.ToString());
                 throw new Exception(response.HttpErrorMessage);
             }
             if (response.Error != null)
@@ -271,7 +275,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
             if (response.HttpErrorStatusCode != null)
             {
                 logger.LogError("Error performing certificate delete: " + response.HttpErrorMessage);
-                logger.LogDebug(response.HttpErrorStatusCode);
+                logger.LogDebug(response.HttpErrorStatusCode.ToString());
                 throw new Exception(response.HttpErrorMessage);
             }
             if (response.Error != null)
