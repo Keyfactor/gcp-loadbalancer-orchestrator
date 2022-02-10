@@ -10,7 +10,7 @@
 
 
 
-## Use Cases
+# Use Cases
 
 The GCP Load Balancer Orchestrator supports the following capabilities:
 
@@ -20,19 +20,19 @@ The GCP Load Balancer Orchestrator supports the following capabilities:
 
 
 
-## Versioning
+# Versioning
 
 The version number of a the GCP Load Balancer Orchestrator can be verified by right clicking on the GCPLoadBalancer.dll file, selecting Properties, and then clicking on the Details tab.
 
 
 
-## Keyfactor Version Supported
+# Keyfactor Version Supported
 
 The F5 Orchestrator has been tested using Keyfactor Command version 9.4 and the Keyfactor Universal Orchestrator version 9.5.  However, this should be compatible with any Keyfactor versions 9.x and above.
 
 
 
-## GCP Load Balancer Orchestrator Installation
+# GCP Load Balancer Orchestrator Installation
 
 1. In the Keyfactor Orchestrator installation folder (by convention usually C:\Program Files\Keyfactor\Keyfactor Orchestrator), find the "extensions" folder. Underneath that, create a new folder named "GCPLoadBal".  You may choose a different folder name if you want, but when you get to Setting up GCP Load Balancer Certificate Store Type, the Short Name you choose must match this folder name.  Also, the folder name must be a maximum of 10 characters long.
 2. Download the latest version of the GCP Load Balancer Orchestrator from [GitHub](https://github.com/Keyfactor/gcp-loadbalancer-orchestrator).
@@ -41,7 +41,7 @@ The F5 Orchestrator has been tested using Keyfactor Command version 9.4 and the 
 
 
 
-## GCP Load Balancer Configuration
+# GCP Load Balancer Configuration
 
 **1. In Keyfactor Command, go to Settings (the gear icon in the top right) => Certificate Store Types and create a new certificate store type:**
 ![](images/image1.png)
