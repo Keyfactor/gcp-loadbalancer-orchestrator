@@ -1,4 +1,4 @@
-# {{ name }}
+﻿# {{ name }}
 ## {{ integration_type | capitalize }}
 
 <!-- add integration specific information below -->
@@ -44,8 +44,8 @@ The F5 Orchestrator has been tested using Keyfactor Command version 9.4 and the 
 ## GCP Load Balancer Configuration
 
 **1. In Keyfactor Command, go to Settings (the gear icon in the top right) => Certificate Store Types and create a new certificate store type:**
-![](Images/image1.png)
-![](Images/image2.png)
+![](images/image1.png)
+![](images/image2.png)
 
 The certificate store type set up for the GCP Load Balancer Orchestrator should have the following options set:
 
@@ -61,7 +61,7 @@ The certificate store type set up for the GCP Load Balancer Orchestrator should 
 - **PFX Password Style:** Default
 
 **Parameters:** Add 1 custom parameter if authenticating to the GCP API library by passing the GCP service account key from Keyfactor Command (see Authentication):
-![](Images/image3.png)
+![](images/image3.png)
 
 - Name: Must be **jsonKey**
 - Display Name: Desired custom display name
@@ -72,7 +72,7 @@ The certificate store type set up for the GCP Load Balancer Orchestrator should 
 
 
 **2. Create a new GCP Load Balancer certificate store.  Navigate to Certificate Locations =\> Certificate Stores within Keyfactor Command to add the store. Below are the values that should be entered.**
-![](Images/image4.png)
+![](images/image4.png)
 
 - **Category:** Must be the GCP Load Balancer type you created in Step 1.
 
