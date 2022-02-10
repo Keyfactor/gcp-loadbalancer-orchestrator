@@ -34,10 +34,10 @@ The F5 Orchestrator has been tested using Keyfactor Command version 9.4 and the 
 
 # GCP Load Balancer Orchestrator Installation
 
-1. In the Keyfactor Orchestrator installation folder (by convention usually C:\Program Files\Keyfactor\Keyfactor Orchestrator), find the "extensions" folder. Underneath that, create a new folder named "GCPLoadBal".  You may choose a different folder name if you want, but when you get to Setting up GCP Load Balancer Certificate Store Type, the Short Name you choose must match this folder name.  Also, the folder name must be a maximum of 10 characters long.
+1. In the Keyfactor Orchestrator installation folder (by convention C:\Program Files\Keyfactor\Keyfactor Orchestrator), find the "extensions" folder. Underneath that, create a new folder named "GCPLoadBal".  You may choose a different folder name if you want, but when you get to GCP Load Balancer Configuration - Step 1, the Short Name you choose must match this folder name.  Also, the folder name must be a maximum of 10 characters long.
 2. Download the latest version of the GCP Load Balancer Orchestrator from [GitHub](https://github.com/Keyfactor/gcp-loadbalancer-orchestrator).
-3. Copy the contents of the download installation zip file to the folder created in step 1.
-4. (Optional) If you decided to name any of the folders in step 1 to something different than the suggested names, you will need to edit the manifest.json file.  For each section, change {folder name} in "CertStores.{folder name}.*Capability*" to the folder name you used for each store type.  
+3. Copy the contents of the download installation zip file to the folder created in Step 1.
+4. (Optional) If you decided to name of the folder in step 1 to something different than the suggested name - GCPLoadBal - you will need to edit the manifest.json file.  For each section, change {folder name} in "CertStores.{folder name}.*Capability*" to the folder name you used for the store type.  
 
 
 
@@ -101,8 +101,6 @@ A service account is necessary for authentication to GCP.  The following are the
 - compute.sslCertificates.delete
 - compute.sslCertificates.list
 
-The agent supports having credentials provided by the environment, environment variable, or passed manually from Keyfactor Command.  
-You can read more about the first two options [here](https://cloud.google.com/docs/authentication/production#automatically).
+The agent supports having credentials provided by the environment, environment variable, or passed manually from Keyfactor Command.  You can read more about the first two options [here] https://cloud.google.com/docs/authentication/production#automatically).
 
-To pass credentials from Keyfactor Command you need to first create a service account and then download a service account key.  
-Instructions are [here](https://cloud.google.com/docs/authentication/production#manually).  Remember to assign the appropriate role/permissions for the service account.  Afterwards inside Keyfactor Command copy and paste the contents of the service account key in the password field for the GCP Certificate Store Type.
+To pass credentials from Keyfactor Command you need to first create a service account and then download a service account key.  Instructions are [here](https://cloud.google.com/docs/authentication/production#manually).  Remember to assign the appropriate role/permissions for the service account.  Afterwards inside Keyfactor Command copy and paste the contents of the service account key in the password field for the GCP Certificate Store Type.
