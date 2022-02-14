@@ -135,7 +135,6 @@ jobs:
         run: |
            md ${{ github.workspace }}\zip\Keyfactor
            Compress-Archive -Path `
-           Compress-Archive -Path `
            ${{ env.SOLUTION_FOLDER }}\${{ env.PROJECT_FOLDER }}\bin\Release\netcoreapp3.1\* `
            -DestinationPath ${{ github.workspace }}\zip\Keyfactor\$Env:REPO_NAME.zip -Force  
       
