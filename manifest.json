@@ -1,0 +1,14 @@
+﻿{
+  "extensions": {
+    "Keyfactor.Orchestrators.Extensions.IOrchestratorJobExtension": {
+      "CertStores.GCPLoadBal.Inventory": {
+        "assemblypath": "GCPLoadBalancer.dll",
+        "TypeFullName": "Keyfactor.Extensions.Orchestrator.GCPLoadBalancer.Inventory"
+      },
+      "CertStores.GCPLoadBal.Management": {
+        "assemblypath": "GCPLoadBalancer.dll",
+        "TypeFullName": "Keyfactor.Extensions.Orchestrator.GCPLoadBalancer.Management"
+      }
+    }
+  }
+}
