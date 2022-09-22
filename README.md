@@ -32,7 +32,7 @@ The Keyfactor Universal Orchestrator may be installed on either Windows or Linux
 
 ---
 
-﻿# Introduction 
+# Introduction 
 - The Google Cloud Platform (GCP) Load Balancer Orchestrator allows for the management of Google Cloud Platform Load Balancer certificate stores.  Inventory, Management-Add, and Management-Remove functions are supported.  Also, re-binding to endpoints IS supported for certificate renewals (but NOT adding new certificates).  The orchestrator uses the Google Cloud Compute Engine API (https://cloud.google.com/compute/docs/reference/rest/v1) to manage stores.
 
 
