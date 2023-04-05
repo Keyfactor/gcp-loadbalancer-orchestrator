@@ -30,8 +30,6 @@ ___
 
 ## Platform Specific Notes
 
-The minimum version of the Universal Orchestrator Framework needed to run this version of the extension is 
-
 The Keyfactor Universal Orchestrator may be installed on either Windows or Linux based platforms. The certificate operations supported by a capability may vary based what platform the capability is installed on. The table below indicates what capabilities are supported based on which platform the encompassing Universal Orchestrator is running.
 | Operation | Win | Linux |
 |-----|-----|------|
@@ -41,6 +39,7 @@ The Keyfactor Universal Orchestrator may be installed on either Windows or Linux
 |Supports Discovery|  |  |
 |Supports Renrollment|  |  |
 |Supports Inventory|&check; |  |
+
 
 
 
