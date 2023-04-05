@@ -32,6 +32,7 @@ using Google.Apis.Compute.v1.Data;
 using Google.Apis.Services;
 
 using Data = Google.Apis.Compute.v1.Data;
+using static Google.Apis.Requests.BatchRequest;
 
 namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
 {
@@ -42,6 +43,10 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
         private string region = string.Empty;
         private ComputeService service;
         ILogger logger;
+
+        private const int OPERATION_MAX_WAIT_MILLISECONDS = 300000;
+        private const int OPERATION_INTERVAL_WAIT_MILLISECONDS = 5000;
+        private const string OPERATION_DONE = "DONE";
 
         public GCPStore(string storePath, Dictionary<string, string> storeProperties)
         {
@@ -133,11 +138,19 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
 
                     //SCENARIO => renew certificate process - bind to temporary alias, delete previous version of cert with desired alias, add renewed certificate, update bindings to renewed cert and remove temp bindings,
                     //   delete cert with temp alias
-                    logger.LogDebug("Bind cert with temp alias, delete cert to be renewed, add renewed cert, update bindings to new renewed cert, delete temp cert");
+                    logger.LogDebug("Replace bindings with renewed certificate added with temporary alias");
                     processBindings(targetCertificateSelfLink, tempCertificateSelfLink);
+
+                    logger.LogDebug("Delete previous certificate");
                     delete(alias);
+
+                    logger.LogDebug("Add renewed certificate with desired alias");
                     insert(sslCertificate);
+
+                    logger.LogDebug("Replace bindings with renewed certificate added with desired alias");
                     processBindings(tempCertificateSelfLink, targetCertificateSelfLink);
+
+                    logger.LogDebug("Remove certificate previously added with temporary alias");
                     delete(tempAlias);
                 }
                 //SCENARIO => certificate does NOT exist for passed in alias.  certificate MUST exist for temporary alias since we already know one or both MUST exist from previous check.
@@ -145,8 +158,13 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                 else
                 {
                     logger.LogDebug("Certificate is not in GCP, but temporary one is - Cleanup of prior error state.  insert renewed certificate, bind renewed certificate and remove temp binding, delete temporary certificate.");
+                    logger.LogDebug("Insert renewed certificate with desired alias");
                     insert(sslCertificate);
+
+                    logger.LogDebug("Replace bindings with renewed certificate added with desired alias");
                     processBindings(tempCertificateSelfLink, targetCertificateSelfLink);
+
+                    logger.LogDebug("Remove certificate previously added with temporary alias");
                     delete(tempAlias);
                     return;
                 }
@@ -256,6 +274,9 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                 logger.LogDebug(response.Error.ToString());
                 throw new Exception(response.Error.ToString());
             }
+
+            if (response.Status.ToUpper() != OPERATION_DONE)
+                WaitForOperation(response.Name, $"Inserting certificate for alias {sslCertificate.Name}");
         }
 
         public void delete(string alias)
@@ -284,6 +305,42 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                 logger.LogDebug(response.Error.ToString());
                 throw new Exception(response.Error.ToString());
             }
+
+            if (response.Status.ToUpper() != OPERATION_DONE)
+                WaitForOperation(response.Name, $"Deleting {alias}");
+
+        }
+
+        private void WaitForOperation(string operationName, string function)
+        {
+            logger.LogDebug($"Begin WAIT for {function}.");
+            DateTime endTime = DateTime.Now.AddMilliseconds(OPERATION_MAX_WAIT_MILLISECONDS);
+            Operation response = new Operation();
+
+            while (DateTime.Now < endTime)
+            {
+                logger.LogDebug($"Attempting WAIT for {function} at {DateTime.Now.ToString()}.");
+                if (string.IsNullOrEmpty(region))
+                {
+                    GlobalOperationsResource.WaitRequest request = getComputeService().GlobalOperations.Wait(this.project, operationName);
+                    response = request.Execute();
+                }
+                else
+                {
+                    RegionOperationsResource.WaitRequest request = getComputeService().RegionOperations.Wait(this.project, region, operationName);
+                    response = request.Execute();
+                }
+
+                if (response.Status == OPERATION_DONE)
+                {
+                    logger.LogDebug($"End WAIT for {function}.  Task DONE.");
+                    return;
+                }
+
+                System.Threading.Thread.Sleep(OPERATION_INTERVAL_WAIT_MILLISECONDS);
+            }
+
+            throw new Exception($"{function} was still processing after the {OPERATION_MAX_WAIT_MILLISECONDS.ToString()} millisecond maximum wait time.");
         }
 
         private void processBindings(string prevCertificateSelfLink, string newCertificateSelfLink)
@@ -345,6 +402,9 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                                 logger.LogError($"Error setting SSL Certificates for resource: {proxy.Name} " + response.Error.ToString());
                                 throw new Exception(response.Error.ToString());
                             }
+
+                            if (response.Status.ToUpper() != OPERATION_DONE)
+                                WaitForOperation(response.Name, $"Binding for {newCertificateSelfLink}");
                         }
                     }
                 }
