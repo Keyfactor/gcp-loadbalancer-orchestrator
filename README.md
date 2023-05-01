@@ -19,7 +19,6 @@ The Universal Orchestrator is the successor to the Windows Orchestrator. This Or
 GCP Load Balancer is supported by Keyfactor for Keyfactor customers. If you have a support issue, please open a support ticket with your Keyfactor representative.
 
 ###### To report a problem or suggest a new feature, use the **[Issues](../../issues)** tab. If you want to contribute actual bug fixes or proposed enhancements, use the **[Pull requests](../../pulls)** tab.
-___
 
 
 
@@ -39,6 +38,7 @@ The Keyfactor Universal Orchestrator may be installed on either Windows or Linux
 |Supports Discovery|  |  |
 |Supports Renrollment|  |  |
 |Supports Inventory|&check; |  |
+
 
 
 
@@ -141,6 +141,10 @@ A service account is necessary for authentication to GCP.  The following are the
 - compute.sslCertificates.create
 - compute.sslCertificates.delete
 - compute.sslCertificates.list
+- compute.sslCertificates.get
+- compute.targetHttpsProxies.list
+- compute.targetHttpsProxies.setSslCertificates
+- compute.regionSslCertificates.list
 
 The agent supports having credentials provided by the environment, environment variable, or passed manually from Keyfactor Command.  You can read more about the first two options [here] (https://cloud.google.com/docs/authentication/production#automatically).
 
