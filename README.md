@@ -141,6 +141,10 @@ A service account is necessary for authentication to GCP.  The following are the
 - compute.sslCertificates.create
 - compute.sslCertificates.delete
 - compute.sslCertificates.list
+- compute.sslCertificates.get
+- compute.targetHttpsProxies.list
+- compute.targetHttpsProxies.setSslCertificates
+- compute.regionSslCertificates.list
 
 The agent supports having credentials provided by the environment, environment variable, or passed manually from Keyfactor Command.  You can read more about the first two options [here] (https://cloud.google.com/docs/authentication/production#automatically).
 
