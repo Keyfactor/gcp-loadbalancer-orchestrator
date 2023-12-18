@@ -215,7 +215,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                             Alias = sslCertificate.Name,
                             Certificates = new string[] { sslCertificate.Certificate },
                             ItemStatus = OrchestratorInventoryItemStatus.Unknown,
-                            PrivateKeyEntry = false,
+                            PrivateKeyEntry = true,
                             UseChainLevel = false
                         });
                     }
@@ -228,7 +228,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                             Alias = sslCertificate.Name,
                             Certificates = new string[] { sslCertificate.SelfManaged.Certificate },
                             ItemStatus = OrchestratorInventoryItemStatus.Unknown,
-                            PrivateKeyEntry = false,
+                            PrivateKeyEntry = true,
                             UseChainLevel = false
                         });
                     }
