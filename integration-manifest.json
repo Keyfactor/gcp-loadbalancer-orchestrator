@@ -26,7 +26,42 @@
         "supportsReenrollment": false,
         "supportsInventory": false,
         "platformSupport": "Unused"
+      },
+      "store_types": {
+        "GCPLoadBal": {
+          "Name": "GCP Load Balancer",
+          "ShortName": "GCPLoadBal",
+          "Capability": "GCPLoadBal",
+          "ServerRequired": false,
+          "BlueprintAllowed": false,
+          "CustomAliasAllowed": "Optional",
+          "PowerShell": false,
+          "PrivateKeyAllowed": "Required",
+          "SupportedOperations": {
+            "Add": true,
+            "Create": false,
+            "Discovery": false,
+            "Enrollment": false,
+            "Remove": true
+          },
+          "PasswordOptions": {
+            "Style": "Default",
+            "EntrySupported": false,
+            "StoreRequired": false
+          },
+          "Properties": [
+            {
+              "Name": "jsonKey",
+              "DisplayName": "Service Account Key",
+              "Required": true,
+              "DependsOn": "",
+              "Type": "Secret",
+              "DefaultValue": ""
+            }
+          ],
+          "EntryParameters": []
+        }
       }
     }
   }
-}
+ }
