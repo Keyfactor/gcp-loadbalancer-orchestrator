@@ -6,9 +6,12 @@
   "update_catalog": true,
   "link_github": true,
   "support_level": "kf-supported",
+  "release_dir": "GCPLoadBalancer/bin/Release/netcoreapp3.1",
   "description": "The Google Cloud Platform (GCP) Load Balancer Orchestrator allows for the management of Google Cloud Platform Load Balancer certificate stores.  Inventory, Management-Add, and Management-Remove functions are supported.  Also, re-binding to endpoints IS supported for certificate renewals (but NOT adding new certificates).  The orchestrator uses the Google Cloud Compute Engine API (https://cloud.google.com/compute/docs/reference/rest/v1) to manage stores.",
   "about": {
     "orchestrator": {
+      "UOFramework": "10.1",
+      "keyfactor_platform_version": "9.10",
       "win": {
         "supportsCreateStore": false,
         "supportsDiscovery": false,
@@ -26,7 +29,42 @@
         "supportsReenrollment": false,
         "supportsInventory": false,
         "platformSupport": "Unused"
+      },
+      "store_types": {
+        "GCPLoadBal": {
+          "Name": "GCP Load Balancer",
+          "ShortName": "GCPLoadBal",
+          "Capability": "GCPLoadBal",
+          "ServerRequired": false,
+          "BlueprintAllowed": false,
+          "CustomAliasAllowed": "Optional",
+          "PowerShell": false,
+          "PrivateKeyAllowed": "Required",
+          "SupportedOperations": {
+            "Add": true,
+            "Create": false,
+            "Discovery": false,
+            "Enrollment": false,
+            "Remove": true
+          },
+          "PasswordOptions": {
+            "Style": "Default",
+            "EntrySupported": false,
+            "StoreRequired": false
+          },
+          "Properties": [
+            {
+              "Name": "jsonKey",
+              "DisplayName": "Service Account Key",
+              "Required": true,
+              "DependsOn": "",
+              "Type": "Secret",
+              "DefaultValue": ""
+            }
+          ],
+          "EntryParameters": []
+        }
       }
     }
   }
-}
+ }
