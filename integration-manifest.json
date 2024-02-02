@@ -12,6 +12,7 @@
     "orchestrator": {
       "UOFramework": "10.1",
       "keyfactor_platform_version": "9.10",
+      "pam_support": false,
       "win": {
         "supportsCreateStore": false,
         "supportsDiscovery": false,
