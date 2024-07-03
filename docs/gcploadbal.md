@@ -173,8 +173,8 @@ The following table describes the required and optional fields for the `GCPLoadB
 | --------- | ----------- | ------------------------- |
 | Category | Select "GCP Load Balancer" or the customized certificate store name from the previous step. | |
 | Container | Optional container to associate certificate store with. | |
-| Client Machine | For the Client Machine field, enter the name or IP address of the Orchestrator server that will handle the jobs for the GCP Load Balancer. For example, you might enter 'orchestrator.example.local' or '192.168.0.1'. | |
-| Store Path | For the Store Path field, enter your Google Cloud project ID. Optionally, you can append a region to the project ID, separated by a '/', to specify a particular region. For example, 'my-gcp-project' or 'my-gcp-project/us-central1'. | |
+| Client Machine | The name or IP address of the Orchestrator server that will handle GCP jobs. Example: orchestrator-server.example.com or 192.168.1.100. | |
+| Store Path | The Google Cloud project ID, optionally appended with the region code if targeting a specific region. Example: my-project-id or my-project-id/us-central1. | |
 | Orchestrator | Select an approved orchestrator capable of managing `GCPLoadBal` certificates. Specifically, one with the `GCPLoadBal` capability. | |
 
 * **Using kfutil**
