@@ -6,7 +6,7 @@
   "update_catalog": true,
   "link_github": true,
   "support_level": "kf-supported",
-  "release_dir": "GCPLoadBalancer/bin/Release/netcoreapp3.1",
+  "release_dir": "GCPLoadBalancer/bin/Release",
   "release_project": "GCPLoadBalancer/GCPLoadBalancer.csproj",
   "description": "The Google Cloud Platform (GCP) Load Balancer Orchestrator allows for the management of Google Cloud Platform Load Balancer certificate stores.  Inventory, Management-Add, and Management-Remove functions are supported.  Also, re-binding to endpoints IS supported for certificate renewals (but NOT adding new certificates).  The orchestrator uses the Google Cloud Compute Engine API (https://cloud.google.com/compute/docs/reference/rest/v1) to manage stores.",
   "about": {
