@@ -1,3 +1,7 @@
+v2.2.0
+- Update to generate dual build for .net6/.net8 configurations
+- Update to use doctool for README generation.
+
 v2.1.2
 - Bug Fix: Private key entry return value - set to True
 

@@ -6,33 +6,16 @@
   "update_catalog": true,
   "link_github": true,
   "support_level": "kf-supported",
-  "release_dir": "GCPLoadBalancer/bin/Release/netcoreapp3.1",
+  "release_dir": "GCPLoadBalancer/bin/Release",
+  "release_project": "GCPLoadBalancer/GCPLoadBalancer.csproj",
   "description": "The Google Cloud Platform (GCP) Load Balancer Orchestrator allows for the management of Google Cloud Platform Load Balancer certificate stores.  Inventory, Management-Add, and Management-Remove functions are supported.  Also, re-binding to endpoints IS supported for certificate renewals (but NOT adding new certificates).  The orchestrator uses the Google Cloud Compute Engine API (https://cloud.google.com/compute/docs/reference/rest/v1) to manage stores.",
   "about": {
     "orchestrator": {
       "UOFramework": "10.1",
       "keyfactor_platform_version": "9.10",
       "pam_support": false,
-      "win": {
-        "supportsCreateStore": false,
-        "supportsDiscovery": false,
-        "supportsManagementAdd": true,
-        "supportsManagementRemove": true,
-        "supportsReenrollment": false,
-        "supportsInventory": true,
-        "platformSupport": "Unused"
-      },
-      "linux": {
-        "supportsCreateStore": false,
-        "supportsDiscovery": false,
-        "supportsManagementAdd": false,
-        "supportsManagementRemove": false,
-        "supportsReenrollment": false,
-        "supportsInventory": false,
-        "platformSupport": "Unused"
-      },
-      "store_types": {
-        "GCPLoadBal": {
+      "store_types": [
+        {
           "Name": "GCP Load Balancer",
           "ShortName": "GCPLoadBal",
           "Capability": "GCPLoadBal",
@@ -58,14 +41,18 @@
               "Name": "jsonKey",
               "DisplayName": "Service Account Key",
               "Required": true,
+              "IsPAMEligible": false,
               "DependsOn": "",
               "Type": "Secret",
-              "DefaultValue": ""
+              "DefaultValue": "",
+              "Description": "If authenticating by passing credentials from Keyfactor Command, this is the JSON-based service account key created from within Google Cloud.  If authenticating via Application Default Credentials (ADC), select No Value"
             }
           ],
+          "ClientMachineDescription": "Not used, but required when creating a store.  Just enter any value.",
+          "StorePathDescription": "Your Google Cloud Project ID only if you choose to use global resources.  Append a forward slash '/' and valid GCP region to process against a specific [GCP region](https://gist.github.com/rpkim/084046e02fd8c452ba6ddef3a61d5d59).",
           "EntryParameters": []
         }
-      }
+      ]
     }
   }
- }
+}
