@@ -496,7 +496,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
 
         private string CreateTempAlias(string alias)
         {
-            return MAX_ALIAS_LENGTH - TEMP_ALIAS_SUFFIX.Length >= alias.Length ? alias : alias.Substring(0, MAX_ALIAS_LENGTH - TEMP_ALIAS_SUFFIX.Length);
+            return MAX_ALIAS_LENGTH - TEMP_ALIAS_SUFFIX.Length >= alias.Length ? alias + TEMP_ALIAS_SUFFIX : alias.Substring(0, MAX_ALIAS_LENGTH - TEMP_ALIAS_SUFFIX.Length) + TEMP_ALIAS_SUFFIX;
         }
     }
 }
