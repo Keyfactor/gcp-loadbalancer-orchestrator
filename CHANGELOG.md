@@ -1,3 +1,6 @@
+v2.2.1
+- Bug Fix: Truncate long alias names to build temporary alias name when replacing a certificate to avoid error when going over max 63 character limit
+
 v2.2.0
 - Update to generate dual build for .net6/.net8 configurations
 - Update to use doctool for README generation.
