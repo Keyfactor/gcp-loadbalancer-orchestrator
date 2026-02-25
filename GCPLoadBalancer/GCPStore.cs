@@ -47,6 +47,8 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
         private const int OPERATION_MAX_WAIT_MILLISECONDS = 300000;
         private const int OPERATION_INTERVAL_WAIT_MILLISECONDS = 5000;
         private const string OPERATION_DONE = "DONE";
+        private const string TEMP_ALIAS_SUFFIX = "-temp";
+        private const int MAX_ALIAS_LENGTH = 63;
 
         public GCPStore(string storePath, Dictionary<string, string> storeProperties)
         {
@@ -62,7 +64,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
         public void insert(SslCertificate sslCertificate, bool overwrite)
         {
             string alias = sslCertificate.Name;
-            string tempAlias = alias + "-temp";
+            string tempAlias = CreateTempAlias(alias);
             string targetCertificateSelfLink = string.Empty;
             string tempCertificateSelfLink = string.Empty;
 
@@ -490,6 +492,11 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                 project = projectRegion[0];
                 region = projectRegion[1];
             }
+        }
+
+        private string CreateTempAlias(string alias)
+        {
+            return MAX_ALIAS_LENGTH - TEMP_ALIAS_SUFFIX.Length >= alias.Length ? alias + TEMP_ALIAS_SUFFIX : alias.Substring(0, MAX_ALIAS_LENGTH - TEMP_ALIAS_SUFFIX.Length) + TEMP_ALIAS_SUFFIX;
         }
     }
 }
