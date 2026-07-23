@@ -77,7 +77,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                 catch (Google.GoogleApiException ex)
                 {
                     if (ex.HttpStatusCode != System.Net.HttpStatusCode.NotFound)
-                        throw ex;
+                        throw;
                 }
 
                 //SCENARIO => certificate alias exists, but overwrite flag not set.  ERROR
@@ -106,7 +106,7 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
                 catch (Google.GoogleApiException ex)
                 {
                     if (ex.HttpStatusCode != System.Net.HttpStatusCode.NotFound)
-                        throw ex;
+                        throw;
                 }
 
                 //SCENARIO => Overwrite flag set.  Neither the passed in alias nor the temporary alias exists, so no clean up from a previous job is necessary.  No
@@ -316,12 +316,12 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
         private void WaitForOperation(string operationName, string function)
         {
             logger.LogDebug($"Begin WAIT for {function}.");
-            DateTime endTime = DateTime.Now.AddMilliseconds(OPERATION_MAX_WAIT_MILLISECONDS);
+            System.DateTime endTime = System.DateTime.Now.AddMilliseconds(OPERATION_MAX_WAIT_MILLISECONDS);
             Operation response = new Operation();
 
-            while (DateTime.Now < endTime)
+            while (System.DateTime.Now < endTime)
             {
-                logger.LogDebug($"Attempting WAIT for {function} at {DateTime.Now.ToString()}.");
+                logger.LogDebug($"Attempting WAIT for {function} at {System.DateTime.Now.ToString()}.");
                 if (string.IsNullOrEmpty(region))
                 {
                     GlobalOperationsResource.WaitRequest request = getComputeService().GlobalOperations.Wait(this.project, operationName);
