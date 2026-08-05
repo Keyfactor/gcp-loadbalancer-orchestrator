@@ -157,6 +157,7 @@ the Keyfactor Command Portal
    If authenticating by passing credentials from Keyfactor Command, this is the JSON-based service account key created from within Google Cloud.  If authenticating via Application Default Credentials (ADC), select No Value
 
    ![GCPLoadBal Custom Field - jsonKey](docsource/images/GCPLoadBal-custom-field-jsonKey-dialog.svg)
+   ![GCPLoadBal Custom Field - jsonKey](docsource/images/GCPLoadBal-custom-field-jsonKey-validation-options-dialog.svg)
 
 
    </details>
