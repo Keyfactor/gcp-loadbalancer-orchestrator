@@ -1,5 +1,5 @@
 v2.3.0
-- Updated library references, primarily Google.Apis* libraries to support Workload Identity Federation (WIF) for Google Application Default Credentials (ADCP.
+- Updated library references, primarily Google.Apis* libraries to support Workload Identity Federation (WIF) for Google Application Default Credentials (ADC).
 
 v2.2.1
 - Bug Fix: Truncate long alias names to build temporary alias name when replacing a certificate to avoid error when going over max 63 character limit
