@@ -33,13 +33,12 @@
 
 The Google Cloud Platform (GCP) Load Balancer Orchestrator allows for the management of Google Cloud Platform Load Balancer certificate stores. Inventory, Management-Add, and Management-Remove functions are supported. Also, re-binding to endpoints IS supported for certificate renewals (but NOT adding new certificates). The orchestrator uses the Google Cloud Compute Engine API (https://cloud.google.com/compute/docs/reference/rest/v1) to manage stores.
 
-
-
 ## Compatibility
 
 This integration is compatible with Keyfactor Universal Orchestrator version 10.1 and later.
 
 ## Support
+
 The GCP Load Balancer Universal Orchestrator extension is supported by Keyfactor. If you require support for any issues or have feature request, please open a support ticket by either contacting your Keyfactor representative or via the Keyfactor Support Portal at https://support.keyfactor.com.
 
 > If you want to contribute bug fixes or additional enhancements, use the **[Pull requests](../../pulls)** tab.
@@ -47,7 +46,6 @@ The GCP Load Balancer Universal Orchestrator extension is supported by Keyfactor
 ## Requirements & Prerequisites
 
 Before installing the GCP Load Balancer Universal Orchestrator extension, we recommend that you install [kfutil](https://github.com/Keyfactor/kfutil). Kfutil is a command-line tool that simplifies the process of creating store types, installing extensions, and instantiating certificate stores in Keyfactor Command.
-
 
 The orchestrator extension supports having credentials provided by the environment, environment variable, or passed manually from Keyfactor Command.  You can read more about the first two options [here](https://cloud.google.com/docs/authentication/production#automatically).
 
@@ -62,33 +60,28 @@ The following are the required permissions for the GCP service account:
 - compute.targetHttpsProxies.setSslCertificates
 - compute.regionSslCertificates.list
 
-
 ## GCPLoadBal Certificate Store Type
 
 To use the GCP Load Balancer Universal Orchestrator extension, you **must** create the GCPLoadBal Certificate Store Type. This only needs to happen _once_ per Keyfactor Command instance.
 
 
 
-
-
-
-
-
 #### Supported Operations
 
-| Operation    | Is Supported                                                                                                           |
-|--------------|------------------------------------------------------------------------------------------------------------------------|
-| Add          | ✅ Checked        |
-| Remove       | ✅ Checked     |
-| Discovery    | 🔲 Unchecked  |
+| Operation    | Is Supported |
+|--------------|--------------|
+| Add          | ✅ Checked |
+| Remove       | ✅ Checked |
+| Discovery    | 🔲 Unchecked |
 | Reenrollment | 🔲 Unchecked |
-| Create       | 🔲 Unchecked     |
+| Create       | 🔲 Unchecked |
 
 #### Store Type Creation
 
 ##### Using kfutil:
 `kfutil` is a custom CLI for the Keyfactor Command API and can be used to create certificate store types.
 For more information on [kfutil](https://github.com/Keyfactor/kfutil) check out the [docs](https://github.com/Keyfactor/kfutil?tab=readme-ov-file#quickstart)
+
    <details><summary>Click to expand GCPLoadBal kfutil details</summary>
 
    ##### Using online definition from GitHub:
@@ -107,10 +100,10 @@ For more information on [kfutil](https://github.com/Keyfactor/kfutil) check out 
    ```
    </details>
 
-
 #### Manual Creation
 Below are instructions on how to create the GCPLoadBal store type manually in
 the Keyfactor Command Portal
+
    <details><summary>Click to expand manual GCPLoadBal details</summary>
 
    Create a store type called `GCPLoadBal` with the attributes in the tables below:
@@ -121,11 +114,11 @@ the Keyfactor Command Portal
    | Name | GCP Load Balancer | Display name for the store type (may be customized) |
    | Short Name | GCPLoadBal | Short display name for the store type |
    | Capability | GCPLoadBal | Store type name orchestrator will register with. Check the box to allow entry of value |
-   | Supports Add | ✅ Checked | Check the box. Indicates that the Store Type supports Management Add |
-   | Supports Remove | ✅ Checked | Check the box. Indicates that the Store Type supports Management Remove |
-   | Supports Discovery | 🔲 Unchecked |  Indicates that the Store Type supports Discovery |
-   | Supports Reenrollment | 🔲 Unchecked |  Indicates that the Store Type supports Reenrollment |
-   | Supports Create | 🔲 Unchecked |  Indicates that the Store Type supports store creation |
+   | Supports Add | ✅ Checked | Indicates that the Store Type supports Management Add |
+   | Supports Remove | ✅ Checked | Indicates that the Store Type supports Management Remove |
+   | Supports Discovery | 🔲 Unchecked | Indicates that the Store Type supports Discovery |
+   | Supports Reenrollment | 🔲 Unchecked | Indicates that the Store Type supports Reenrollment |
+   | Supports Create | 🔲 Unchecked | Indicates that the Store Type supports store creation |
    | Needs Server | 🔲 Unchecked | Determines if a target server name is required when creating store |
    | Blueprint Allowed | 🔲 Unchecked | Determines if store type may be included in an Orchestrator blueprint |
    | Uses PowerShell | 🔲 Unchecked | Determines if underlying implementation is PowerShell |
@@ -134,18 +127,18 @@ the Keyfactor Command Portal
 
    The Basic tab should look like this:
 
-   ![GCPLoadBal Basic Tab](docsource/images/GCPLoadBal-basic-store-type-dialog.png)
+   ![GCPLoadBal Basic Tab](docsource/images/GCPLoadBal-basic-store-type-dialog.svg)
 
    ##### Advanced Tab
    | Attribute | Value | Description |
    | --------- | ----- | ----- |
    | Supports Custom Alias | Optional | Determines if an individual entry within a store can have a custom Alias. |
-   | Private Key Handling | Required | This determines if Keyfactor can send the private key associated with a certificate to the store. Required because IIS certificates without private keys would be invalid. |
+   | Private Key Handling | Required | This determines if Keyfactor can send the private key associated with a certificate to the store. |
    | PFX Password Style | Default | 'Default' - PFX password is randomly generated, 'Custom' - PFX password may be specified when the enrollment job is created (Requires the Allow Custom Password application setting to be enabled.) |
 
    The Advanced tab should look like this:
 
-   ![GCPLoadBal Advanced Tab](docsource/images/GCPLoadBal-advanced-store-type-dialog.png)
+   ![GCPLoadBal Advanced Tab](docsource/images/GCPLoadBal-advanced-store-type-dialog.svg)
 
    > For Keyfactor **Command versions 24.4 and later**, a Certificate Format dropdown is available with PFX and PEM options. Ensure that **PFX** is selected, as this determines the format of new and renewed certificates sent to the Orchestrator during a Management job. Currently, all Keyfactor-supported Orchestrator extensions support only PFX.
 
@@ -158,17 +151,13 @@ the Keyfactor Command Portal
 
    The Custom Fields tab should look like this:
 
-   ![GCPLoadBal Custom Fields Tab](docsource/images/GCPLoadBal-custom-fields-store-type-dialog.png)
-
+   ![GCPLoadBal Custom Fields Tab](docsource/images/GCPLoadBal-custom-fields-store-type-dialog.svg)
 
    ###### Service Account Key
    If authenticating by passing credentials from Keyfactor Command, this is the JSON-based service account key created from within Google Cloud.  If authenticating via Application Default Credentials (ADC), select No Value
 
-   ![GCPLoadBal Custom Field - jsonKey](docsource/images/GCPLoadBal-custom-field-jsonKey-dialog.png)
-   ![GCPLoadBal Custom Field - jsonKey](docsource/images/GCPLoadBal-custom-field-jsonKey-validation-options-dialog.png)
-
-
-
+   ![GCPLoadBal Custom Field - jsonKey](docsource/images/GCPLoadBal-custom-field-jsonKey-dialog.svg)
+   ![GCPLoadBal Custom Field - jsonKey](docsource/images/GCPLoadBal-custom-field-jsonKey-validation-options-dialog.svg)
 
 
    </details>
@@ -177,18 +166,17 @@ the Keyfactor Command Portal
 
 1. **Download the latest GCP Load Balancer Universal Orchestrator extension from GitHub.**
 
-    Navigate to the [GCP Load Balancer Universal Orchestrator extension GitHub version page](https://github.com/Keyfactor/gcp-loadbalancer-orchestrator/releases/latest). Refer to the compatibility matrix below to determine the asset should be downloaded. Then, click the corresponding asset to download the zip archive.
+    Navigate to the [GCP Load Balancer Universal Orchestrator extension GitHub version page](https://github.com/Keyfactor/gcp-loadbalancer-orchestrator/releases/latest). Refer to the compatibility matrix below to determine which asset should be downloaded. Then, click the corresponding asset to download the zip archive.
 
    | Universal Orchestrator Version | Latest .NET version installed on the Universal Orchestrator server | `rollForward` condition in `Orchestrator.runtimeconfig.json` | `gcp-loadbalancer-orchestrator` .NET version to download |
    | --------- | ----------- | ----------- | ----------- |
-   | Older than `11.0.0` | | | `net6.0` |
-   | Between `11.0.0` and `11.5.1` (inclusive) | `net6.0` | | `net6.0` |
-   | Between `11.0.0` and `11.5.1` (inclusive) | `net8.0` | `Disable` | `net6.0` || Between `11.0.0` and `11.5.1` (inclusive) | `net8.0` | `LatestMajor` | `net8.0` |
-   | `11.6` _and_ newer | `net8.0` | | `net8.0` | 
+   | Between `11.0.0` and `11.5.1` (inclusive) | `net8.0` | `LatestMajor` | `net8.0` |
+   | `11.6` _and_ newer | `net8.0` | | `net8.0` |
+   | `25.5` _and_ newer | `net10.0` | | `net10.0` |
 
     Unzip the archive containing extension assemblies to a known location.
 
-    > **Note** If you don't see an asset with a corresponding .NET version, you should always assume that it was compiled for `net6.0`.
+    > **Note** If you don't see an asset with a corresponding .NET version, you should always assume that it was compiled for `net10.0`.
 
 2. **Locate the Universal Orchestrator extensions directory.**
 
@@ -206,21 +194,15 @@ the Keyfactor Command Portal
 
     Refer to [Starting/Restarting the Universal Orchestrator service](https://software.keyfactor.com/Core-OnPrem/Current/Content/InstallingAgents/NetCoreOrchestrator/StarttheService.htm).
 
-
 6. **(optional) PAM Integration**
 
     The GCP Load Balancer Universal Orchestrator extension is compatible with all supported Keyfactor PAM extensions to resolve PAM-eligible secrets. PAM extensions running on Universal Orchestrators enable secure retrieval of secrets from a connected PAM provider.
 
     To configure a PAM provider, [reference the Keyfactor Integration Catalog](https://keyfactor.github.io/integrations-catalog/content/pam) to select an extension and follow the associated instructions to install it on the Universal Orchestrator (remote).
 
-
 > The above installation steps can be supplemented by the [official Command documentation](https://software.keyfactor.com/Core-OnPrem/Current/Content/InstallingAgents/NetCoreOrchestrator/CustomExtensions.htm?Highlight=extensions).
 
-
-
 ## Defining Certificate Stores
-
-
 
 ### Store Creation
 
@@ -236,8 +218,8 @@ the Keyfactor Command Portal
 
     Click the Add button to add a new Certificate Store. Use the table below to populate the **Attributes** in the **Add** form.
 
-   | Attribute | Description                                             |
-   | --------- |---------------------------------------------------------|
+   | Attribute | Description |
+   | --------- | ----------- |
    | Category | Select "GCP Load Balancer" or the customized certificate store name from the previous step. |
    | Container | Optional container to associate certificate store with. |
    | Client Machine | Not used, but required when creating a store.  Just enter any value. |
@@ -246,8 +228,6 @@ the Keyfactor Command Portal
    | jsonKey | If authenticating by passing credentials from Keyfactor Command, this is the JSON-based service account key created from within Google Cloud.  If authenticating via Application Default Credentials (ADC), select No Value |
 
 </details>
-
-
 
 #### Using kfutil CLI
 
@@ -279,7 +259,6 @@ the Keyfactor Command Portal
 
 </details>
 
-
 #### PAM Provider Eligible Fields
 <details><summary>Attributes eligible for retrieval by a PAM Provider on the Universal Orchestrator</summary>
 
@@ -294,11 +273,7 @@ Please refer to the **Universal Orchestrator (remote)** usage section ([PAM prov
 
 </details>
 
-
 > The content in this section can be supplemented by the [official Command documentation](https://software.keyfactor.com/Core-OnPrem/Current/Content/ReferenceGuide/Certificate%20Stores.htm?Highlight=certificate%20store).
-
-
-
 
 
 ## License

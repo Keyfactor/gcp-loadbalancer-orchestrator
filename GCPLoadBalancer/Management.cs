@@ -45,7 +45,12 @@ namespace Keyfactor.Extensions.Orchestrator.GCPLoadBalancer
 
         private (byte[], byte[]) GetPemFromPFX(byte[] pfxBytes, char[] pfxPassword)
         {
-            Pkcs12Store p = new Pkcs12Store(new MemoryStream(pfxBytes), pfxPassword);
+            Pkcs12StoreBuilder storeBuilder = new Pkcs12StoreBuilder();
+            Pkcs12Store p = storeBuilder.Build();
+            using (MemoryStream ms = new MemoryStream(pfxBytes))
+            {
+                p.Load(new MemoryStream(pfxBytes), pfxPassword);
+            }
 
             // Extract private key
             MemoryStream memoryStream = new MemoryStream();
