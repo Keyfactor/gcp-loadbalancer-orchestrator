@@ -16,6 +16,9 @@
     <PackageReference Include="Keyfactor.Logging" Version="1.3.0" />
     <PackageReference Include="Keyfactor.Orchestrators.IOrchestratorJobExtensions" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-  </ItemGroup>
+  
+    <None Update="manifest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None></ItemGroup>
 
 </Project>
