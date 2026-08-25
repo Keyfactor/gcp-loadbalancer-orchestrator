@@ -1,3 +1,6 @@
+v2.3.1
+- BUG FIX: Manifest.json not included in build
+
 v2.3.0
 - Updated library references, primarily Google.Apis* libraries to support Workload Identity Federation (WIF) for Google Application Default Credentials (ADC).
 
